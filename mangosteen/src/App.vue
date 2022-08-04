@@ -10,11 +10,6 @@
 
 
 <style lang="scss">
-  // @import "src/assets/styles/test.scss";
-  @import "~@/assets/styles/test.scss";
-body {
-  background: $red;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,6 +1,7 @@
 <template>
     <div>
-            Money.vue
+        Money.vue
+        <Nav />
     </div>
 </template>
 
@@ -8,8 +9,8 @@
     import Vue from 'vue'
 
     export default Vue.extend({
-        
-    })
+    name: "Money",
+})
 </script>
 
 <style lang="scss" scoped>

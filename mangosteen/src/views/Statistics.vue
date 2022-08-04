@@ -1,6 +1,7 @@
 <template>
     <div>
         Statistics.VUE
+        <Nav />
     </div>
 </template>
 
@@ -8,8 +9,8 @@
     import Vue from 'vue'
 
     export default Vue.extend({
-        
-    })
+    name: "Statistics",
+})
 </script>
 
 <style lang="scss" scoped>

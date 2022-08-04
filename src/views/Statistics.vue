@@ -1,18 +1,15 @@
 <template>
-    <div>
-        Statistics.VUE
-        <Nav />
-    </div>
+  <div>
+    <Layout> 
+        Statistics.VUE 
+    </Layout>
+  </div>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
+import Vue from "vue";
 
-    export default Vue.extend({
-    name: "Statistics",
-})
+export default Vue.extend({
+  name: "Statistics",
+});
 </script>
-
-<style lang="scss" scoped>
-
-</style>

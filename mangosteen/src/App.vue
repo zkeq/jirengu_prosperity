@@ -3,7 +3,6 @@
     <!-- App
     <hr/> -->
     <router-view/>
-
   </div>
 </template>
 

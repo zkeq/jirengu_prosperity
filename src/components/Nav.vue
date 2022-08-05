@@ -45,11 +45,12 @@
       }
       > .item.selected{
         > .icon{
-          display: none;
+          // display: none;
         }
         background-color: #f5f5f5;
-        font-size: 1.2rem;
-        font-weight: 400;
+        // font-size: 1.2rem;
+        // font-weight: 400;
+        color: #42b983;
       }
     }
 </style>

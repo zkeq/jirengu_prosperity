@@ -24,6 +24,7 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "~@/assets/style/helper.scss";
     nav{
       display: flex;
       box-shadow: 0 0 3px rgba(0,0,0, 0.25);
@@ -50,7 +51,7 @@
         background-color: #f5f5f5;
         // font-size: 1.2rem;
         // font-weight: 400;
-        color: #42b983;
+        color: $safe-green;
       }
     }
 </style>

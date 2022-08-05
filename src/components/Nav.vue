@@ -44,7 +44,12 @@
         }
       }
       > .item.selected{
+        > .icon{
+          display: none;
+        }
         background-color: #f5f5f5;
+        font-size: 1.2rem;
+        font-weight: 400;
       }
     }
 </style>

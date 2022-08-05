@@ -44,7 +44,7 @@
         }
       }
       > .item.selected{
-        color: #4ef769;
+        background-color: #f5f5f5;
       }
     }
 </style>

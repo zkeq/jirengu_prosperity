@@ -37,9 +37,6 @@
         align-items: center;
         flex-direction: column;
         .icon {
-          > svg {
-            stroke: red;
-          }
           width: 1.3em;
           height: 1.3em;
           vertical-align: -0.15em;

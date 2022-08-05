@@ -1,29 +1,6 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      <div class="tags">
-        <ul class="current">
-          <li>衣</li>
-          <li>食</li>
-          <li>住</li>
-          <li>行</li>
-        </ul>
-        <div class="new">
-          <button>新增标签</button>
-        </div>
-      </div>
-      <div>
-        <label class="notes">
-          <span class="name">备注</span>
-          <input type="text" placeholder="在这里输入本次记账的备注" />
-        </label>
-      </div>
-      <div>
-        <ul class="types">
-          <li class="selected">支出</li>
-          <li class="selected">收入</li>
-        </ul>
-      </div>
       <div class="numberPad">
         <div class="output">100</div>
         <div class="buttons">
@@ -43,6 +20,29 @@
           <button>.</button>
         </div>
       </div>
+      <div>
+        <ul class="types">
+          <li class="selected">支出</li>
+          <li class="selected">收入</li>
+        </ul>
+      </div>
+      <div>
+        <label class="notes">
+          <span class="name">备注</span>
+          <input type="text" placeholder="在这里输入本次记账的备注" />
+        </label>
+      </div>
+      <div class="tags">
+        <div class="new">
+          <button>新增标签</button>
+        </div>
+        <ul class="current">
+          <li>衣</li>
+          <li>食</li>
+          <li>住</li>
+          <li>行</li>
+        </ul>
+      </div>
     </Layout>
   </div>
 </template>
@@ -54,8 +54,8 @@ export default {
 </script>
 
 <style lang="scss">
-.layout-content{
-  border: 3px solid red;
+.layout-content {
+  // border: 3px solid red;
   display: flex;
   flex-direction: column-reverse;
 }
@@ -90,7 +90,7 @@ export default {
       &.zero {
         width: 25% * 2;
       }
-      $bg: #41b883;
+      $bg: #45cc8f;
       &:nth-child(1) {
         background: $bg;
       }
@@ -168,10 +168,14 @@ export default {
   }
 }
 .tags {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
   font-size: 14px;
   padding: 16px;
   > .current {
     display: flex;
+    flex-wrap: wrap;
     > li {
       background: #d9d9d9;
       $h: 24px;

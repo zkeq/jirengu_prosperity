@@ -1,12 +1,15 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="creataTag">新增标签</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag"
-      :class="{selected: selectedTags.indexOf(tag)>=0}"
-      @click="toggle(tag)">
+      <li
+        v-for="tag in dataSource"
+        :key="tag"
+        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+        @click="toggle(tag)"
+      >
         {{ tag }}
       </li>
     </ul>
@@ -15,17 +18,29 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component,Prop } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Tags extends Vue {
-  @Prop() dataSource: string[]  | undefined;
+  @Prop() readonly dataSource: string[] | undefined;
   selectedTags: string[] = ["213"];
   toggle(tag: string) {
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
     } else {
       this.selectedTags.push(tag);
+    }
+  }
+  creataTag() {
+    const name = prompt("请输入标签名称");
+    if (name === "" || name === null || name.length > 18) {
+      window.alert("标签名不能为空或 or 长度超过18个字符");
+    } else {
+      if (this.dataSource) {
+        this.$emit("update:dataSource", [...this.dataSource, name]);
+      } else {
+        this.$emit("update:dataSource", [name]);
+      }
     }
   }
 }
@@ -49,6 +64,7 @@ export default class Tags extends Vue {
       $h: 32px;
       height: $h;
       line-height: $h;
+      overflow: hidden;
       border-radius: $h/3;
       padding: 0 24px;
       margin-right: 12px;

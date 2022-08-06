@@ -19,5 +19,9 @@
   font-family: $font-hei;
   font-size: 16px;
   line-height: 1.5;
+  max-width: 500px;
+  border: 1px solid rgba(0, 0, 0,0.2);
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 </style>

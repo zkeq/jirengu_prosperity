@@ -29,7 +29,7 @@ import Component from "vue-class-component";
   },
 })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行", "123", "456", "789", "0"];
+  tags = ["衣", "食", "住", "行"];
 }
 </script>
 

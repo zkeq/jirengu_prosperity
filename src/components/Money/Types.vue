@@ -7,23 +7,36 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Types",
-  data(){
-    return {
-      type: "-" // '-' 支出 '+' 收入
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+
+@Component
+export default class Types extends Vue {
+  type = "-"; // '-' 支出 '+' 收入
+  selectType(type: string) { // type: '-' 支出 '+' 收入
+    if (type !== "-" && type !== "+") { 
+      throw new Error('type must be "-", "+"');
     }
-  },
-  methods: {
-    selectType(type){ // type: '-' 支出 '+' 收入
-      if (type !== '-' && type !== '+') {
-        throw new Error('type must be "-", "+"')
-      }
-      this.type = type;
-    }
+    this.type = type;
   }
-};
+}
+// export default {
+//   name: "Types",
+//   data(){
+//     return {
+//       type: "-" // '-' 支出 '+' 收入
+//     }
+//   },
+//   methods: {
+//     selectType(type){ // type: '-' 支出 '+' 收入
+//       if (type !== '-' && type !== '+') {
+//         throw new Error('type must be "-", "+"')
+//       }
+//       this.type = type;
+//     }
+//   }
+// };
 </script>
 
 <style lang="scss" scoped>

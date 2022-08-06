@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- App
-    <hr/> -->
-    <!-- router 会自动替换外层的div -->
     <router-view/>
   </div>
 </template>

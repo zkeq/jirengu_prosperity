@@ -2,14 +2,16 @@
   <div>
     <Layout class-prefix="layout">
 
-      <NumberPad />
+      <NumberPad :value.sync="record.amount"/>
 
-      <Types />
+      <Types :value.sync="record.type"/>
 
-      <Notes />
+      <Notes @update:value="onUpdateNotes"/>
 
-      <Tags :data-source.sync="tags" />
-      
+      <Tags :data-source.sync="tags" @update:value="onupdateTags"/>
+
+      {{record}}
+
     </Layout>
   </div>
 </template>
@@ -22,6 +24,13 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Component from "vue-class-component";
 
+type Record = {
+  amount: number;
+  type: string;
+  notes: string;
+  tags: string[];
+}
+
 @Component({
   components: {
     NumberPad,
@@ -32,6 +41,22 @@ import Component from "vue-class-component";
 })
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行"];
+  record: Record = {
+    amount: 0,
+    type: "-",
+    notes: "",
+    tags: [],
+  };
+
+  onupdateTags(value :string[]){
+    this.record.tags = value;
+  }
+  onUpdateNotes(value :string){
+    this.record.notes = value;
+  }
+  onUpdateAmount(value :string){
+    this.record.amount = parseFloat(value);
+  }
 }
 </script>
 

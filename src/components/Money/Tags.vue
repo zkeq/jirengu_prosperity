@@ -23,13 +23,14 @@ import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Tags extends Vue {
   @Prop() readonly dataSource: string[] | undefined;
-  selectedTags: string[] = ["213"];
+  selectedTags: string[] = [];
   toggle(tag: string) {
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
     } else {
       this.selectedTags.push(tag);
     }
+    this.$emit("update:value", this.selectedTags);
   }
   creataTag() {
     const name = prompt("请输入标签名称");

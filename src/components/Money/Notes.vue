@@ -1,6 +1,6 @@
 <template>
   <label class="notes">
-    <span class="name">{{this.fieldName}}</span>
+    <span class="name">{{fieldName}}</span>
     <!-- <input type="text" 
     :value="value" 
     @input="value = $event.target.value"
@@ -10,7 +10,7 @@
     <input type="text" 
     :value="value"
     @input="onValueChange($event.target.value)" 
-    :placeholder="this.placeholder" 
+    :placeholder="placeholder" 
     />
   </label>
 </template>
@@ -26,7 +26,6 @@ export default class Notes extends Vue {
   @Prop({required: true}) fieldName!: string;
   @Prop({}) placeholder?: string;
 
-  @Watch("value")
   onValueChange(value: string) {
     this.$emit("update:value", value);
   }

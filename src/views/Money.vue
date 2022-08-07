@@ -24,14 +24,9 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
+import { model } from "@/model";
 
-type Record = {
-  amount: number;
-  type: string;
-  notes: string;
-  tags: string[]; // 数据类型  object | string
-  creactAt?: Date; // 类 / 构造函数
-}
+const recordList = model.fetch();
 
 @Component({
   components: {
@@ -44,8 +39,8 @@ type Record = {
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行"];
   // recordList: Record[] = window.localStorage.getItem("recordList") ? JSON.parse(window.localStorage.getItem("recordList") as string) : [];
-  recordList: Record[] = JSON.parse(window.localStorage.getItem("recordList")|| "[]");
-  record: Record = {
+  recordList: RecordItem[] = recordList;
+  record: RecordItem = {
     amount: 0,
     type: "-",
     notes: "",
@@ -62,14 +57,14 @@ export default class Money extends Vue {
 
   saveRecord() {
     // 深拷贝
-    const record: Record = JSON.parse(JSON.stringify(this.record));
+    const record: RecordItem = model.clone(this.record);
     record.creactAt = new Date();
     this.recordList.push(record);
   }
 
   @Watch('recordList')
-  onRecordListChange(value: Record[]) {
-    localStorage.setItem("recordList", JSON.stringify(value));
+  onRecordListChange(value: RecordItem[]) {
+    model.save(value);
   }
 }
 </script>

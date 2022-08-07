@@ -1,6 +1,7 @@
 <template>
   <div>
     <Layout class-prefix="layout">
+
       <NumberPad />
 
       <Types />
@@ -8,6 +9,7 @@
       <Notes />
 
       <Tags :data-source.sync="tags" />
+      
     </Layout>
   </div>
 </template>

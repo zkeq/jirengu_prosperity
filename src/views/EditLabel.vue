@@ -5,8 +5,10 @@
             <span class="title">编辑标签</span>
             <span class="rightIcon"></span>
         </div>
-        <span class="now">当前标签：{{tag}}</span>
-        <Notes field-name="新标签名" placeholder="请输入标签" />
+        <span class="now">当前标签 ID：{{tag.id}}</span>
+        <Notes field-name="新标签名" placeholder="请输入标签" 
+        :value="tag.name"
+        />
         <div class="button-wrapper">
             <Button>删除标签</Button>
         </div>
@@ -27,14 +29,14 @@ import Button from '../components/Button.vue'
     }
 })
 export default class EditLabel extends Vue {
-    tag: string = '';
+    tag?: {id:string, name:string} = undefined;
     created() {
         const id = this.$route.params.id
         tagListModel.fetch()
         const tags = tagListModel.data
         const tag = tags.find(item => item.id === id)
         if (tag) {
-            this.tag = tag.name
+            this.tag = tag
         } else {
             this.$router.replace('/lables')
         }
@@ -77,7 +79,7 @@ export default class EditLabel extends Vue {
 .now{
     font-weight: 300;
     border-radius: 10%;
-    padding: 8px;
+    padding: 4px;
     background-color: rgba(255, 255, 255, 0.822);
     color: #030303;
     font-size: 14px;

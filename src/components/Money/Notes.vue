@@ -8,7 +8,8 @@
     /> -->
     <!-- v-model 简写 -->
     <input type="text" 
-    v-model="value"
+    :value="value"
+    @input="onValueChange($event.target.value)" 
     :placeholder="this.placeholder" 
     />
   </label>
@@ -20,7 +21,7 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Notes extends Vue {
-  @Prop({default: ""}) value!: string;
+  @Prop({default: ""}) readonly value!: string;
 
   @Prop({required: true}) fieldName!: string;
   @Prop({}) placeholder?: string;

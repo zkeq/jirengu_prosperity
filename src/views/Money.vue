@@ -13,7 +13,7 @@
 
       <Tags :data-source.sync="tags" @update:value="onupdateTags"/>
 
-      {{recordList}}
+      {{record}}
 
     </Layout>
   </div>

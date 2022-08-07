@@ -24,9 +24,11 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
-import { model } from "@/model";
+import { recordListModel } from "@/models/recordListModel";
+import { tagListModel } from "@/models/tagListModel";
 
-const recordList = model.fetch();
+const recordList = recordListModel.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   components: {
@@ -37,7 +39,7 @@ const recordList = model.fetch();
   },
 })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行"];
+  tags = tagList;
   // recordList: Record[] = window.localStorage.getItem("recordList") ? JSON.parse(window.localStorage.getItem("recordList") as string) : [];
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
@@ -57,14 +59,14 @@ export default class Money extends Vue {
 
   saveRecord() {
     // 深拷贝
-    const record: RecordItem = model.clone(this.record);
+    const record: RecordItem = recordListModel.clone(this.record);
     record.creactAt = new Date();
     this.recordList.push(record);
   }
 
   @Watch('recordList')
   onRecordListChange(value: RecordItem[]) {
-    model.save(value);
+    recordListModel.save(value);
   }
 }
 </script>

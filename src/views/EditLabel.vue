@@ -1,6 +1,13 @@
 <template>
     <Layout>
-        编辑标签
+        <div>
+            <Icon name="left"/>
+            <span>编辑标签</span>
+        </div>
+        <Notes 
+            field-name="标签名" 
+            placeholder="请输入标签"
+        />
     </Layout>
 </template>
 
@@ -8,8 +15,13 @@
 import { tagListModel } from '@/models/tagListModel'
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import Notes from '../components/Money/Notes.vue'
 
-@Component
+@Component({
+    components: {
+        Notes
+    }
+})
 export default class EditLabel extends Vue {
     tag: string = '';
     created() {

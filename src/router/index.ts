@@ -19,7 +19,7 @@ const routes: Array<RouteConfig> = [
     component: Money
   },
   {
-    path: "/lables",
+    path: "/labels",
     component: Labels
   },
   {
@@ -27,7 +27,7 @@ const routes: Array<RouteConfig> = [
     component: Statistics
   },
   {
-    path: "/lables/edit/:id",
+    path: "/labels/edit/:id",
     component: EditLabel
   },
   { 

@@ -16,7 +16,7 @@
                 class="record"
               >
               <span class="tags">{{tagString(item.tags)}}</span>
-              <span class="notes">{{item.notes}}很长很很长很长</span>
+              <span class="notes">{{item.notes}}</span>
               <span>￥{{ item.amount }}</span>
               </li>
             </ol>

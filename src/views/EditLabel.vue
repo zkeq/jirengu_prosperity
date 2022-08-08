@@ -33,8 +33,7 @@ export default class EditLabel extends Vue {
     tag?: {id:string, name:string} = undefined;
     created() {
         const id = this.$route.params.id
-        tagListModel.fetch()
-        const tags = tagListModel.data
+        const tags = window.tagList
         const tag = tags.find(item => item.id === id)
         if (tag) {
             this.tag = tag

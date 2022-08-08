@@ -13,39 +13,51 @@
 </template>
 
 <script lang="ts">
-  import Types from '@/components/Money/Types.vue';
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-  import Tabs from '@/components/Tabs.vue';
-  @Component({
-    components: {Tabs, Types},
-  })
-  export default class Statistics extends Vue {
-    type = '-';
-    interval = 'day';
-    intervalList = [
-      {text: '按天', value: 'day'},
-      {text: '按周', value: 'week'},
-      {text: '按月', value: 'month'},
-    ];
-    typeList = [
-      {text: '支出', value: '-'},
-      {text: '收入', value: '+'},
-    ];
-  }
+import Types from '@/components/Money/Types.vue';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import Tabs from '@/components/Tabs.vue';
+@Component({
+  components: { Tabs, Types },
+})
+export default class Statistics extends Vue {
+  type = '-';
+  interval = 'day';
+  intervalList = [
+    { text: '按天', value: 'day' },
+    { text: '按周', value: 'week' },
+    { text: '按月', value: 'month' },
+  ];
+  typeList = [
+    { text: '支出', value: '-' },
+    { text: '收入', value: '+' },
+  ];
+}
 </script>
 
 <style lang="scss" scoped>
-::v-deep .type-tabs-item {
-  background: white;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-  &.selected {
-    background: #32b67a;
+::v-deep {
+  .type-tabs-item {
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+
+    &.selected {
+      background: #32b67a;
       color: #fff;
+    }
+
+    &::after {
+      display: none;
+    }
   }
 
-  &::after {
-    display: none;
+  li.interval-tabs-item {
+    height: 52px;
+    font-size: 18px;
+    // 加左右的边框
+    border-left: rgb(252, 252, 252)  dashed  1px;
+    border-right: rgb(252, 252, 252)  dashed   1px;
+    // border: rgb(252, 252, 252)  dashed  1px;
   }
 }
 </style>

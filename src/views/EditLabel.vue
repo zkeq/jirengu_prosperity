@@ -54,7 +54,6 @@ export default class EditLabel extends Vue {
         this.$router.replace('/labels')
     }
     goBack() {
-        console.log("back")
         this.$router.go(-1)
     }
 }

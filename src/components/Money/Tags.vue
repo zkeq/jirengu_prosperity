@@ -7,8 +7,8 @@
       <li
         v-for="tag in tagList"
         :key="tag.id"
-        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
-        @click="toggle(tag)"
+        :class="{ selected: selectedTags.indexOf(tag.id) >= 0 }"
+        @click="toggle(tag.id)"
       >
         {{ tag.name }}
       </li>
@@ -23,8 +23,8 @@ import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Tags extends Vue {
   tagList = window.tagList;
-  selectedTags: Tag[] = [];
-  toggle(tag: Tag) {
+  selectedTags: string[] = [];
+  toggle(tag: string) {
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
     } else {

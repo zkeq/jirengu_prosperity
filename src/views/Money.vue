@@ -11,7 +11,7 @@
         placeholder="在这里输入本次记账的备注"
         @update:value="onUpdateNotes"/>
 
-      <Tags />
+      <Tags @update:value="onUpdateTags"/>
 
       {{record}}
 
@@ -55,6 +55,10 @@ export default class Money extends Vue {
   saveRecord() {
     recordListModel.create(this.record);
   }
+
+  onUpdateTags(value: string[]) {
+      this.record.tags = value;
+    }
 
   @Watch('recordList')
   onRecordListChange() {

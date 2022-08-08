@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout> 
-        Statistics.VUE 
+        {{recordList}}
     </Layout>
   </div>
 </template>
@@ -11,5 +11,10 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "Statistics",
+  data(){
+    return {
+      recordList: window.recordList,
+    }
+  }
 });
 </script>

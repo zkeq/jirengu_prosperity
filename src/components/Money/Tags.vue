@@ -5,7 +5,7 @@
     </div>
     <ul class="current">
       <li
-        v-for="tag in dataSource"
+        v-for="tag in tagList"
         :key="tag.id"
         :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
         @click="toggle(tag)"
@@ -22,9 +22,9 @@ import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Tags extends Vue {
-  @Prop() readonly dataSource: string[] | undefined;
-  selectedTags: string[] = [];
-  toggle(tag: string) {
+  tagList = window.tagList;
+  selectedTags: Tag[] = [];
+  toggle(tag: Tag) {
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
     } else {
@@ -37,11 +37,7 @@ export default class Tags extends Vue {
     if (name === "" || name === null || name.length > 18) {
       window.alert("标签名不能为空或 or 长度超过18个字符");
     } else {
-      if (this.dataSource) {
-        this.$emit("update:dataSource", [...this.dataSource, name]);
-      } else {
-        this.$emit("update:dataSource", [name]);
-      }
+     window.createTag(name);
     }
   }
 }

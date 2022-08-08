@@ -11,7 +11,7 @@
         placeholder="在这里输入本次记账的备注"
         @update:value="onUpdateNotes"/>
 
-      <Tags :data-source.sync="tags" @update:value="onupdateTags"/>
+      <Tags />
 
       {{record}}
 
@@ -28,7 +28,6 @@ import Tags from "@/components/Money/Tags.vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import { recordListModel } from "@/models/recordListModel";
-import { tagListModel } from "@/models/tagListModel";
 
 
 @Component({
@@ -40,7 +39,6 @@ import { tagListModel } from "@/models/tagListModel";
   },
 })
 export default class Money extends Vue {
-  tags = window.tagList;
   // recordList: Record[] = window.localStorage.getItem("recordList") ? JSON.parse(window.localStorage.getItem("recordList") as string) : [];
   recordList = window.recordList;
   record: RecordItem = {
@@ -49,10 +47,6 @@ export default class Money extends Vue {
     notes: "",
     tags: [],
   };
-
-  onupdateTags(value :string[]){
-    this.record.tags = value;
-  }
 
   onUpdateNotes(value :string){
     this.record.notes = value;

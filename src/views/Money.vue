@@ -30,7 +30,6 @@ import { Watch } from "vue-property-decorator";
 import { recordListModel } from "@/models/recordListModel";
 import { tagListModel } from "@/models/tagListModel";
 
-const recordList = recordListModel.fetch();
 
 @Component({
   components: {
@@ -43,7 +42,7 @@ const recordList = recordListModel.fetch();
 export default class Money extends Vue {
   tags = window.tagList;
   // recordList: Record[] = window.localStorage.getItem("recordList") ? JSON.parse(window.localStorage.getItem("recordList") as string) : [];
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
   record: RecordItem = {
     amount: 0,
     type: "-",

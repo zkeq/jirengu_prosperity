@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts">
-import { tagListModel } from "@/models/tagListModel";
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "@/components/Button.vue";

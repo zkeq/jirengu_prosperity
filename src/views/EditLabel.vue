@@ -5,10 +5,10 @@
             <span class="title">编辑标签</span>
             <span class="rightIcon"></span>
         </div>
-        <span class="now">当前标签 ID：{{tag?.id}}</span>
+        <span class="now">当前标签 ID：{{tag.id}}</span>
         <Notes field-name="新标签名" placeholder="请输入标签" 
         @update:value="onUpdateTag"
-        :value="tag?.name"
+        :value="tag.name"
         />
         <div class="button-wrapper">
             <Button @click.native="remove">删除标签</Button>

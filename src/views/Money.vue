@@ -31,7 +31,6 @@ import { recordListModel } from "@/models/recordListModel";
 import { tagListModel } from "@/models/tagListModel";
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: {
@@ -42,7 +41,7 @@ const tagList = tagListModel.fetch();
   },
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   // recordList: Record[] = window.localStorage.getItem("recordList") ? JSON.parse(window.localStorage.getItem("recordList") as string) : [];
   recordList: RecordItem[] = recordList;
   record: RecordItem = {

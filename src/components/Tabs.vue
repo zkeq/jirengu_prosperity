@@ -21,6 +21,10 @@
     readonly value!: string;
     @Prop(String)
     classPrefix?: string;
+    // @Prop({type: String, default: '64px'})
+    // height!: string;
+    // js 设置高度
+    // :style="{height: height}"
     liClass(item: DataSourceItem) {
       return {
         [this.classPrefix + '-tabs-item']: this.classPrefix,

@@ -4,6 +4,22 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+
+// 如果 env 为 development，则清除localStorage
+if (localStorage.getItem("env") === "development" || localStorage.getItem("env") === null) {
+  localStorage.clear();
+}
+// 设置 localstorage 的 env 为 development
+localStorage.setItem("env", "development");
+
+// 设置localstorage env 为dev
+export default class Labels extends Vue {
+}
+
+</script>
+
 
 <style lang="scss">
 @import "~@/assets/style/reset.scss";

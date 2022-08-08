@@ -3,7 +3,7 @@ type RecordItem = {
   type: string;
   notes: string;
   tags: string[]; // 数据类型  object | string
-  creactAt?: Date; // 类 / 构造函数
+  createAt?: string; // 类 / 构造函数
 };
 
 interface Window {

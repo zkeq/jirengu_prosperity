@@ -65,6 +65,8 @@ export default class Money extends Vue {
   @Watch('recordList')
   onRecordListChange() {
     recordListModel.save();
+    // 重载页面
+    this.$router.go(0);
   }
 }
 </script>

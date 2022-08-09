@@ -20,7 +20,7 @@
                     </td>
 
                     <td>
-                        {{ record.amount }}
+                        {{ record.amount }} 元
                     </td>
                 </tr>
 
@@ -29,7 +29,7 @@
                         条目类型
                     </td>
                     <td>
-                        {{ record.type }}
+                        {{ beautifyType(record.type) }}
                     </td>
                 </tr>
 
@@ -47,7 +47,7 @@
                         条目标签
                     </td>
                     <td>
-                        {{ record.tags }}
+                        {{ beautifyTags(record.tags) }}
                     </td>
                 </tr>
             </tbody>
@@ -62,6 +62,21 @@ import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class CurrentDetails extends Vue {
     @Prop({ required: true }) record!: RecordItem;
+    beautifyType(type: string) {
+        return type === '-' ? '支出' : '收入';
+    }
+    beautifyTags(tags: string[]) {
+        let tagList = window.tagList;
+        let result = [];
+        for (let tag of tags) {
+            for (let item of tagList) {
+                if (item.id === tag) {
+                    result.push(item.name);
+                }
+            }
+        }
+        return result.join('、');
+    }
 }
 </script>
 

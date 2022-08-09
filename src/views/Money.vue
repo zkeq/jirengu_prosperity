@@ -6,8 +6,13 @@
 
       <Types :value.sync="record.type" />
 
-      <Notes field-name="备注" placeholder="在这里输入本次记账的备注" :value.sync="record.notes" />
+      <div class="oneline">
 
+      <Notes type="date" field-name="时间" :value.sync="record.createAt" />
+
+      <Notes field-name="备注" placeholder="在这里输入记账的备注" :value.sync="record.notes" />
+
+      </div>
       <Tags :value.sync="record.tags" />
 
       <CurrentDetails :record.sync="record" />
@@ -46,6 +51,7 @@ export default class Money extends Vue {
     type: "-",
     notes: "",
     tags: [],
+    createAt: new Date().toISOString(),
   };
   h = document.body.clientHeight; 
   saveRecord() {
@@ -90,5 +96,10 @@ export default class Money extends Vue {
   // border: 3px solid red;
   display: flex;
   flex-direction: column-reverse;
+}
+.oneline{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
 }
 </style>

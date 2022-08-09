@@ -1,33 +1,43 @@
 <template>
   <label class="notes">
-    <span class="name">{{fieldName}}</span>
+    <span class="name">{{ fieldName }}</span>
     <!-- <input type="text" 
     :value="value" 
     @input="value = $event.target.value"
     placeholder="在这里输入本次记账的备注" 
     /> -->
     <!-- v-model 简写 -->
-    <input type="text" 
-    :value="value"
-    @input="onValueChange($event.target.value)" 
-    :placeholder="placeholder" 
-    />
+    <template v-if="type === 'date'">
+      <input :type="type || 'text'" :value="x(value)" @input="onValueChange($event.target.value)" :max="x(new Date().toISOString())"
+        :placeholder="placeholder" />
+    </template>
+    <template v-else>
+      <input :type="type || 'text'" :value="value" @input="onValueChange($event.target.value)"
+        :placeholder="placeholder" />
+
+    </template>
+
   </label>
 </template>
 
 <script lang="ts">
+import dayjs from "dayjs";
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Notes extends Vue {
-  @Prop({default: ""}) readonly value!: string;
+  @Prop({ default: "" }) readonly value!: string;
 
-  @Prop({required: true}) fieldName!: string;
+  @Prop({ required: true }) fieldName!: string;
   @Prop({}) placeholder?: string;
+  @Prop() type?: string;
 
   onValueChange(value: string) {
     this.$emit("update:value", value);
+  }
+  x(isoString:string){
+    return dayjs(isoString).format("YYYY-MM-DD");
   }
 }
 </script>
@@ -39,13 +49,16 @@ export default class Notes extends Vue {
   padding-left: 16px;
   display: flex;
   align-items: center;
+
   .name {
     padding-right: 16px;
   }
+
   input {
     &::placeholder {
       padding: 5px;
     }
+
     height: 64px;
     flex-grow: 1;
     background: #fff;

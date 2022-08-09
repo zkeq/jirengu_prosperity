@@ -74,10 +74,10 @@ export default class Notes extends Vue {
 }
 .notes:first-child {
   padding-left: 0;
-  max-width: 40%;
+  max-width: 45%;
 }
 .notes:last-child {
-  max-width: 60%;
+  max-width: 55%;
   flex: 1
 }
 </style>

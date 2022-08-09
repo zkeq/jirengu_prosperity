@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <Tabs class-prefix="type" :data-source="typeList" :value.sync="type" />
-      <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" />
+      <!-- <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" /> -->
       <div>
         <!-- type: {{ type }}
         <br />
@@ -10,7 +10,7 @@
         <br /> -->
         <ol>
           <li v-for="(group, index) in groupList" :key="index">
-            <h3 class="title">{{ beautify(group.title) }}</h3>
+            <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
             <ol>
               <li v-for="item in group.items" :key="item.createAt" class="record">
                 <span class="tags">{{ tagString(item.tags) }}</span>
@@ -43,16 +43,16 @@ export default class Statistics extends Vue {
   beautify(string: string) {
     const day = dayjs(string);
     const now = dayjs();
-    if (day.isSame(now, 'day')){
+    if (day.isSame(now, 'day')) {
       return '今天';
-    }else if(day.isSame(now.subtract(1, 'day'), 'day')){
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
       return '昨天';
-    } else if (day.isSame(now.subtract(2, 'day'), 'day')){
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
       return '前天';
     } // 如果是今年就不用写年份了
-     else if (day.isSame(now, 'year')){
+    else if (day.isSame(now, 'year')) {
       return day.format('M月D日');
-     }
+    }
     else {
       return day.format('YYYY年MM月DD日');
     }
@@ -74,15 +74,24 @@ export default class Statistics extends Vue {
     if (recordList.length === 0) {
       return [];
     }
-    const newList = clone(recordList.sort((a,b) => dayjs(a.createAt).valueOf() - dayjs(b.createAt).valueOf()).reverse());
-    const result = [{title: dayjs(recordList[0].createAt).format('YYYY-MM-DD'), items: [recordList[0]]}];
-    for(let i = 1; i < newList.length; i++) {
+    const newList = clone(recordList)
+      .filter(r => r.type === this.type)
+      .sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
+
+    type Result = { title: string, total?: number, items: RecordItem[] }[]
+    const result: Result = [{ title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]] }];
+    for (let i = 1; i < newList.length; i++) {
       if (dayjs(newList[i].createAt).format('YYYY-MM-DD') === dayjs(newList[i - 1].createAt).format('YYYY-MM-DD')) {
         result[result.length - 1].items.push(newList[i]);
       } else {
-        result.push({title: dayjs(newList[i].createAt).format('YYYY-MM-DD'), items: [newList[i]]});
+        result.push({ title: dayjs(newList[i].createAt).format('YYYY-MM-DD'), items: [newList[i]] });
       }
     }
+    result.map(group => {
+      group.total = group.items.reduce((sum, item) => {
+        return sum +  item.amount;;
+      }, 0);
+    });
     return result;
   }
   type = '-';

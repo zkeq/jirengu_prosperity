@@ -49,9 +49,11 @@ export default class Notes extends Vue {
   padding-left: 16px;
   display: flex;
   align-items: center;
+  max-width: 50%;
 
   .name {
     padding-right: 16px;
+    white-space: nowrap;
   }
 
   input {

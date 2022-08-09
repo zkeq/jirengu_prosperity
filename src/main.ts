@@ -22,6 +22,10 @@ window.recordList = recordListModel.fetch();
 
 // TAG store
 window.tagList = tagListModel.fetch();
+// 如果没有tagList，则创建一个默认的tagList
+if (!window.tagList || window.tagList.length === 0) {
+  window.tagList = tagListModel.createDefaultTagList();
+}
 window.createTag = (name: string) => {
   const message = tagListModel.create(name)
   if (message === "duplicated"){

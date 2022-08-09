@@ -24,4 +24,5 @@ type TagLisModel = {
   update: (id: string, name: string) => "success" | "not found" | "duplicated"
   remove: (id: string) => "success" | "not found"
   save: () => void
+  createDefaultTagList: () => Tag[]
 }

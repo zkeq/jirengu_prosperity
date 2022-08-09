@@ -2,7 +2,7 @@ import createID from "@/lib/createID";
 
 const localStorageKeyName = 'tagList';
 
-const tagListModel:TagLisModel = {
+const tagListModel: TagLisModel = {
     data: [],
     fetch() {
         this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || "[]");
@@ -11,11 +11,23 @@ const tagListModel:TagLisModel = {
     save() {
         window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
     },
+    createDefaultTagList() {
+        const tagList = [
+            "衣服",
+            "食物",
+            "住房",
+            "交通",
+        ]
+        tagList.forEach(tag => {
+            this.create(tag)
+        })
+        return this.data;
+    },
     create(name: string) {
         const names = this.data.map(item => item.name);
-        if(names.indexOf(name)>=0){ return "duplicated" }
+        if (names.indexOf(name) >= 0) { return "duplicated" }
         const id = createID();
-        this.data.push({id, name:name});
+        this.data.push({ id, name: name });
         this.save();
         return "success";
     },

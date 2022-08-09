@@ -8,7 +8,7 @@
         <br />
         interval: {{ interval }}
         <br /> -->
-        <ol>
+        <ol v-if="groupList.length>0">
           <li v-for="(group, index) in groupList" :key="index">
             <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
             <ol>
@@ -20,7 +20,9 @@
             </ol>
           </li>
         </ol>
-
+        <div v-else class="noRusult">
+            目前没有相关记录
+        </div>
       </div>
     </Layout>
   </div>
@@ -165,5 +167,11 @@ export default class Statistics extends Vue {
   color: #fff;
   padding: 0 4px;
   font-size: small;
+}
+.noRusult{
+  padding: 16px;
+  text-align: center;
+  font-weight: 400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

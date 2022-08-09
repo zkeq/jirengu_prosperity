@@ -18,7 +18,7 @@ export default {
   display: flex;
   // border: 1px solid green;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 .content {
   // border: 1px solid blue;

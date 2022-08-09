@@ -52,7 +52,7 @@ export default class Notes extends Vue {
   max-width: 50%;
 
   .name {
-    padding-right: 16px;
+    padding-right: 5px;
     white-space: nowrap;
   }
 

@@ -50,12 +50,23 @@
                         {{ beautifyTags(record.tags) }}
                     </td>
                 </tr>
+
+                  <tr>
+                    <td>
+                        日期
+                    </td>
+                    <td>
+                        {{ beautifyDate(record.createAt) }}
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>
 </template>
 
 <script lang="ts">
+import dayjs from 'dayjs';
 import Vue from 'vue'
 import { Component, Prop } from "vue-property-decorator";
 
@@ -76,6 +87,9 @@ export default class CurrentDetails extends Vue {
             }
         }
         return result.join('、');
+    }
+    beautifyDate(isoString: string | undefined) {
+        return dayjs(isoString).format("YYYY-MM-DD");
     }
 }
 </script>

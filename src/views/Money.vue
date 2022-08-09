@@ -61,15 +61,7 @@ export default class Money extends Vue {
       return;
     }
     Notify.success("记账格式检验成功");
-  }
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
-  }
-
-  @Watch('recordList')
-  onRecordListChange() {
-    let type = this.record.type;
+       let type = this.record.type;
     if (type === '+') {
       type = "收入";
     } else {
@@ -92,6 +84,10 @@ export default class Money extends Vue {
       {
       },
     );
+  }
+
+  onUpdateTags(value: string[]) {
+    this.record.tags = value;
   }
 }
 </script>

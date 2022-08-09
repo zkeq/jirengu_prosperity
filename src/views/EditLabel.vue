@@ -126,4 +126,10 @@ export default class EditLabel extends Vue {
     line-height: 44px;
     margin: 0 16px;
 }
+
+::v-deep {
+    .button{
+        background: #ff5549
+    }
+}
 </style>

@@ -61,7 +61,6 @@ export default class Money extends Vue {
       return;
     }
     Notify.success("记账格式检验成功");
-    recordListModel.create(this.record);
   }
 
   onUpdateTags(value: string[]) {
@@ -82,9 +81,10 @@ export default class Money extends Vue {
       'Yes',
       'No',
       () => {
+        recordListModel.create(this.record);
         recordListModel.save();
         // 刷新页面
-        window.location.reload();
+        this.$router.go(0);
       },
       () => {
 

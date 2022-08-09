@@ -6,9 +6,9 @@
 
       <Types :value.sync="record.type" />
 
-      <Notes field-name="备注" placeholder="在这里输入本次记账的备注" @update:value="onUpdateNotes" />
+      <Notes field-name="备注" placeholder="在这里输入本次记账的备注" :value.sync="record.notes" />
 
-      <Tags @update:value="onUpdateTags" :value="record.tags" />
+      <Tags :value.sync="record.tags" />
 
       <CurrentDetails :record.sync="record" />
 
@@ -48,9 +48,6 @@ export default class Money extends Vue {
     tags: [],
   };
 
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
-  }
 
   saveRecord() {
     if (this.record.amount === 0) {
@@ -76,7 +73,8 @@ export default class Money extends Vue {
         recordListModel.create(this.record);
         recordListModel.save();
         // 刷新页面
-        this.$router.go(0);
+        // this.$router.go(0);
+        this.record.notes = "";
       },
       () => {
 
@@ -84,10 +82,6 @@ export default class Money extends Vue {
       {
       },
     );
-  }
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
   }
 }
 </script>

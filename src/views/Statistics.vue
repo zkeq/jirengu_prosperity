@@ -2,12 +2,10 @@
   <div>
     <Layout>
       <Tabs class-prefix="type" :data-source="typeList" :value.sync="type" />
-      <!-- <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval" /> -->
       <div>
-        <!-- type: {{ type }}
-        <br />
-        interval: {{ interval }}
-        <br /> -->
+        <div class="chart-wrapper" ref="chartWrapper">
+          <Chart class="chart" :options="chartOptions"/>
+        </div>
         <ol v-if="groupList.length>0">
           <li v-for="(group, index) in groupList" :key="index">
             <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
@@ -37,9 +35,12 @@ import { Component } from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import Chart from '@/components/Chart.vue';
+import _ from 'lodash';
+import day from 'dayjs';
 
 @Component({
-  components: { Tabs, Types },
+  components: { Tabs, Types, Chart },
 })
 export default class Statistics extends Vue {
   beautify(string: string) {
@@ -71,6 +72,74 @@ export default class Statistics extends Vue {
     }).join('|');
     return tagNames;
   }
+     get keyValueList() {
+      const today = new Date();
+      const array = [];
+      console.log(this.groupList);
+      for (let i = 0; i <= 29; i++) {
+        // this.recordList = [{date:7.3, value:100}, {date:7.2, value:200}]
+        const dateString = day(today)
+          .subtract(i, 'day').format('YYYY-MM-DD');
+        const found = _.find(this.groupList, {
+          title: dateString
+        });
+        array.push({
+          key: dateString, value: found ? found.total : 0
+        });
+      }
+      array.sort((a, b) => {
+        if (a.key > b.key) {
+          return 1;
+        } else if (a.key === b.key) {
+          return 0;
+        } else {
+          return -1;
+        }
+      });
+      console.log('array');
+      console.log(array);
+      return array;
+    }
+
+     get chartOptions() {
+      const keys = this.keyValueList.map(item => item.key);
+      const values = this.keyValueList.map(item => item.value);
+      console.log('values');
+      console.log(values);
+      return {
+        grid: {
+          left: 0,
+          right: 0,
+        },
+        xAxis: {
+          type: 'category',
+          data: keys,
+          axisTick: {alignWithLabel: true},
+          axisLine: {lineStyle: {color: '#666'}},
+          axisLabel: {
+            formatter: function (value: string, index: number) {
+              return value.substring(5);
+            }
+          }
+        },
+        yAxis: {
+          type: 'value',
+          // show: false
+        },
+        series: [{
+          // symbol: 'circle',
+          symbolSize: 12,
+          itemStyle: {borderWidth: 1, color: '#32b67a', borderColor: '#32b67a'},
+          data: values,
+          type: 'bar',
+        }],
+        tooltip: {
+          show: true, triggerOn: 'click',
+          position: 'top',
+          formatter: '{c}'
+        }
+      };
+    }
   get groupList() {
     const recordList = window.recordList;
     const newList = clone(recordList)

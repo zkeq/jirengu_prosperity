@@ -9,7 +9,7 @@
         interval: {{ interval }}
         <br /> -->
         <ol>
-          <li v-for="(group, index) in result" :key="index">
+          <li v-for="(group, index) in groupList" :key="index">
             <h3 class="title">{{ beautify(group.title) }}</h3>
             <ol>
               <li v-for="item in group.items" :key="item.createAt" class="record">
@@ -34,6 +34,7 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import dayjs from 'dayjs';
+import clone from '@/lib/clone';
 
 @Component({
   components: { Tabs, Types },
@@ -68,26 +69,21 @@ export default class Statistics extends Vue {
     }).join(',');
     return tagNames;
   }
-  get result() {
+  get groupList() {
     const recordList = window.recordList;
-    type hahsTableItem = {
-      title: string,
-      items: RecordItem[];
-    };
-    const hahsTable: { [key: string]: hahsTableItem } = {};
-    for (let i = 0; i < recordList.length; i++) {
-      let date = recordList[i].createAt
-      // 将 date 转换成日期对象
-      let date_pass = new Date(date!);
-      // 获取当前的年月日
-      const year = date_pass.getFullYear();
-      const month = date_pass.getMonth() + 1;
-      const day = date_pass.getDate();
-      const resDate = year + '-' + month + '-' + day + '-';
-      hahsTable[resDate] = hahsTable[resDate] || { title: resDate, items: [] };
-      hahsTable[resDate].items.push(recordList[i]);
+    if (recordList.length === 0) {
+      return [];
     }
-    return hahsTable;
+    const newList = clone(recordList.sort((a,b) => dayjs(a.createAt).valueOf() - dayjs(b.createAt).valueOf()).reverse());
+    const result = [{title: dayjs(recordList[0].createAt).format('YYYY-MM-DD'), items: [recordList[0]]}];
+    for(let i = 1; i < newList.length; i++) {
+      if (dayjs(newList[i].createAt).format('YYYY-MM-DD') === dayjs(newList[i - 1].createAt).format('YYYY-MM-DD')) {
+        result[result.length - 1].items.push(newList[i]);
+      } else {
+        result.push({title: dayjs(newList[i].createAt).format('YYYY-MM-DD'), items: [newList[i]]});
+      }
+    }
+    return result;
   }
   type = '-';
   interval = 'day';

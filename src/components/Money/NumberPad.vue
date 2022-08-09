@@ -23,6 +23,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component
 export default class NumberPad extends Vue {
@@ -65,7 +66,6 @@ export default class NumberPad extends Vue {
   }
   submit(){
     this.$emit("submit", parseFloat(this.output));
-    this.output = "0";
   }
   @Watch("output")
   onValueChange(newValue: string, oldValue: string) {
@@ -90,14 +90,14 @@ export default class NumberPad extends Vue {
     @extend %clearFix;
     > button {
       width: 25%;
-      height: 64px;
+      height: 7vh;
       float: left;
       color: #ffffff;
       font-weight: 600;
       background: transparent;
       border: none;
       &.ok {
-        height: 64 * 2px;
+        height: 7 * 2vh;
         float: right;
       }
       &.zero {

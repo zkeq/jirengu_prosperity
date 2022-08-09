@@ -16,6 +16,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Button from "@/components/Button.vue";
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
 @Component({
   components: {
@@ -26,10 +27,25 @@ export default class Labels extends Vue {
   tags = window.tagList; // 知识点1，读的时候要从 window 读
 
   createTag() {
-    const name = window.prompt("请输入标签名");
-    if (name) {
-      window.createTag(name);
-    }
+    Confirm.prompt(
+      '创建新标签',
+      '请输入标签名称',
+      '',
+      'Answer',
+      'Cancel',
+      (clientAnswer) => {
+        if (clientAnswer === "" || clientAnswer === null || clientAnswer.length > 18) {
+          window.alert("标签名不能为空或 or 长度超过18个字符");
+        } else {
+          window.createTag(clientAnswer);
+        }
+      },
+      (clientAnswer) => {
+        console.log('Cancel');
+      },
+      {
+      },
+    );
   }
 };
 </script>

@@ -8,6 +8,7 @@ import Layout from "@/components/Layout.vue";
 import Icon from "@/components/Icon.vue";
 import { tagListModel } from "@/models/tagListModel";
 import { recordListModel } from "./models/recordListModel";
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 Vue.config.productionTip = false;
 
@@ -26,7 +27,11 @@ window.createTag = (name: string) => {
   if (message === "duplicated"){
     window.alert("标签名重复啦")
   }else if (message === "success"){
-    window.alert("添加成功")
+    Report.success(
+      '添加成功',
+      '成功添加标签：' + name,
+      '确认',
+      );
   }
 }
 

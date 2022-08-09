@@ -2,18 +2,15 @@
   <div>
     <Layout class-prefix="layout">
 
-      <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
+      <NumberPad :value.sync="record.amount" @submit="saveRecord" />
 
-      <Types :value.sync="record.type"/>
+      <Types :value.sync="record.type" />
 
-      <Notes 
-        field-name="备注" 
-        placeholder="在这里输入本次记账的备注"
-        @update:value="onUpdateNotes"/>
+      <Notes field-name="备注" placeholder="在这里输入本次记账的备注" @update:value="onUpdateNotes" />
 
-      <Tags @update:value="onUpdateTags"/>
+      <Tags @update:value="onUpdateTags" :value="record.tags" />
 
-      <CurrentDetails :record.sync="record"/>
+      <CurrentDetails :record.sync="record" />
 
     </Layout>
   </div>
@@ -29,7 +26,8 @@ import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import { recordListModel } from "@/models/recordListModel";
 import CurrentDetails from "../components/Money/CurrentDetails.vue";
-
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   components: {
@@ -50,23 +48,50 @@ export default class Money extends Vue {
     tags: [],
   };
 
-  onUpdateNotes(value :string){
+  onUpdateNotes(value: string) {
     this.record.notes = value;
   }
 
   saveRecord() {
+    if (this.record.amount === 0) {
+      Notify.warning("请输入记账金额");
+      return;
+    }else if(this.record.tags.length === 0){
+      Notify.warning("请输入本次记账的标签");
+      return;
+    }
+    Notify.success("记账格式检验成功");
     recordListModel.create(this.record);
   }
 
   onUpdateTags(value: string[]) {
-      this.record.tags = value;
-    }
+    this.record.tags = value;
+  }
 
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save();
-    // 重载页面
-    this.$router.go(0);
+    let type = this.record.type;
+    if (type === '+') {
+      type = "收入";
+    } else {
+      type = "支出";
+    }
+    Confirm.show(
+      '确认添加记账',
+      '确认添加这次 ' + type + " 为 ￥" + this.record.amount + ' 的记账吗？',
+      'Yes',
+      'No',
+      () => {
+        recordListModel.save();
+        // 刷新页面
+        window.location.reload();
+      },
+      () => {
+
+      },
+      {
+      },
+    );
   }
 }
 </script>

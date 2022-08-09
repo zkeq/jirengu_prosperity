@@ -87,17 +87,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
+    line-height: 2vh;
 }
 
 td,
 th {
     text-align: center;
-    padding: 8px;
+    padding: 1vh;
 }
 
 th {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     background-color: #04AA6D;
     color: white;
 }

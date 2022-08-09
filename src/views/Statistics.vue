@@ -66,7 +66,7 @@ export default class Statistics extends Vue {
     let tagNames = id.map(id => {
       let tag = tagList.find(tag => tag.id === id);
       return tag?.name;
-    }).join(',');
+    }).join('|');
     return tagNames;
   }
   get groupList() {
@@ -160,5 +160,10 @@ export default class Statistics extends Vue {
 
 .tags {
   white-space: nowrap;
+  background: #32b67a;
+  border-radius: 4px;
+  color: #fff;
+  padding: 0 4px;
+  font-size: small;
 }
 </style>

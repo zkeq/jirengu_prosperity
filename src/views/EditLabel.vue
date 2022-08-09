@@ -5,11 +5,8 @@
             <span class="title">编辑标签</span>
             <span class="rightIcon"></span>
         </div>
-        <span class="now">当前标签 ID：{{tag.id}}</span>
-        <Notes field-name="新标签名" placeholder="请输入标签" 
-        @update:value="onUpdateTag"
-        :value="tag.name"
-        />
+        <span class="now">当前标签 ID：{{ tag.id }}</span>
+        <Notes field-name="新标签名" placeholder="请输入标签" @update:value="onUpdateTag" :value="tag.name" />
         <div class="button-wrapper">
             <Button @click.native="remove">删除标签</Button>
         </div>
@@ -22,6 +19,9 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import Notes from '../components/Money/Notes.vue'
 import Button from '../components/Button.vue'
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 @Component({
     components: {
@@ -30,7 +30,7 @@ import Button from '../components/Button.vue'
     }
 })
 export default class EditLabel extends Vue {
-    tag?: {id:string, name:string} = undefined;
+    tag?: { id: string, name: string } = undefined;
     created() {
         const id = this.$route.params.id
         const tags = window.tagList
@@ -41,19 +41,42 @@ export default class EditLabel extends Vue {
             this.$router.replace('/lables')
         }
     }
-    onUpdateTag(name:string){
+    onUpdateTag(name: string) {
         if (this.tag) {
-           tagListModel.update(this.tag.id, name)
+            tagListModel.update(this.tag.id, name)
         }
-        
+
     }
-    remove(){
-        if (this.tag) {
-            tagListModel.remove(this.tag.id)
-        }
-        this.$router.replace('/labels')
+    remove() {
+        Report.warning(
+            '敏感操作提醒',
+            '删除标签属于敏感操作，删除后将导致已经添加的标签无法正常显示，如果存在已经使用此标签的记账，请谨慎操作',
+            'Okay',
+            () => {
+                Confirm.show(
+                    '确认删除',
+                    '确认将此标签删除？请注意此操作不可找回，已用的标签将会失效',
+                    '确认删除',
+                    '取消',
+                    () => {
+                        if (this.tag) {
+                            tagListModel.remove(this.tag.id)
+                        }
+                        this.$router.replace('/labels')
+                        Notify.success('成功删除标签');
+                    },
+                    () => {
+                        console.log('Cancel')
+                    },
+                    {
+                    },
+                );
+            },
+        );
+
     }
     goBack() {
+        Notify.success('标签名保存成功');
         this.$router.go(-1)
     }
 }
@@ -86,12 +109,14 @@ export default class EditLabel extends Vue {
 
     }
 }
+
 .button-wrapper {
     text-align: center;
     padding: 16px;
     margin-top: 44-16px;
 }
-.now{
+
+.now {
     font-weight: 300;
     border-radius: 10%;
     padding: 4px;

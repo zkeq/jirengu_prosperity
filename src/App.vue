@@ -12,7 +12,7 @@ if (localStorage.getItem("env") === "development" || localStorage.getItem("env")
   localStorage.clear();
 }
 // 设置 localstorage 的 env 为 development
-localStorage.setItem("env", "production");
+localStorage.setItem("env", "development");
 
 // 设置localstorage env 为dev
 export default class Labels extends Vue {

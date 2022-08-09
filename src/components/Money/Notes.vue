@@ -43,13 +43,16 @@ export default class Notes extends Vue {
 </script>
 
 <style lang="scss" scoped>
+// 第一个 .notes
+
+
 .notes {
   font-size: 14px;
   font-weight: 300;
   padding-left: 16px;
   display: flex;
   align-items: center;
-  max-width: 50%;
+  // max-width: 50%;
 
   .name {
     padding-right: 5px;
@@ -61,11 +64,20 @@ export default class Notes extends Vue {
       padding: 5px;
     }
 
+    max-width: 80%;
     height: 64px;
     flex-grow: 1;
     background: #fff;
     padding: 0 10px;
     border: 7px solid #f5f5f5;
   }
+}
+.notes:first-child {
+  padding-left: 0;
+  max-width: 40%;
+}
+.notes:last-child {
+  max-width: 60%;
+  flex: 1
 }
 </style>

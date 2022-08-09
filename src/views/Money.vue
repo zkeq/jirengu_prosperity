@@ -10,7 +10,7 @@
 
       <Notes type="date" field-name="时间" :value.sync="record.createAt" />
 
-      <Notes field-name="备注" placeholder="在这里输入记账的备注" :value.sync="record.notes" />
+      <Notes field-name="备注" placeholder="在这里输入本次记账的备注" :value.sync="record.notes" />
 
       </div>
       <Tags :value.sync="record.tags" />
@@ -100,6 +100,6 @@ export default class Money extends Vue {
 .oneline{
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 </style>

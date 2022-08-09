@@ -78,8 +78,7 @@ export default class Money extends Vue {
         recordListModel.create(this.record);
         recordListModel.save();
         // 刷新页面
-        // this.$router.go(0);
-        this.record.notes = "";
+        this.$router.go(0);
       },
       () => {
 

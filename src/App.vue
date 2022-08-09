@@ -8,9 +8,9 @@
 import Vue from "vue";
 
 // 如果 env 为 development，则清除localStorage
-if (localStorage.getItem("env") === "development" || localStorage.getItem("env") === null) {
-  localStorage.clear();
-}
+// if (localStorage.getItem("env") === "development" || localStorage.getItem("env") === null) {
+//   localStorage.clear();
+// }
 // 设置 localstorage 的 env 为 development
 localStorage.setItem("env", "development");
 

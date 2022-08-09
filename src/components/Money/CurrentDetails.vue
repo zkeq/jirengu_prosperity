@@ -103,7 +103,7 @@ th {
 }
 
 tr th:first-child {
-    width: 30vw;
+    width: 30%;
 }
 
 .ws-table-all tr:nth-child(even) {

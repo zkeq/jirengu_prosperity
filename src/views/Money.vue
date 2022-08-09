@@ -13,7 +13,7 @@
 
       <Tags @update:value="onUpdateTags"/>
 
-      {{record}}
+      <CurrentDetails :record.sync="record"/>
 
     </Layout>
   </div>
@@ -28,6 +28,7 @@ import Tags from "@/components/Money/Tags.vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import { recordListModel } from "@/models/recordListModel";
+import CurrentDetails from "../components/Money/CurrentDetails.vue";
 
 
 @Component({
@@ -36,6 +37,7 @@ import { recordListModel } from "@/models/recordListModel";
     Types,
     Notes,
     Tags,
+    CurrentDetails
   },
 })
 export default class Money extends Vue {

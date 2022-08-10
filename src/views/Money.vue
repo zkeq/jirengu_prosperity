@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout class-prefix="layout" class="content">
+    <Layout class-prefix="layout" :style="{height:h+'px'}" class="content">
 
       <NumberPad :value.sync="record.amount" @submit="saveRecord" />
 
@@ -53,6 +53,7 @@ export default class Money extends Vue {
     tags: [],
     createAt: new Date().toISOString(),
   };
+  h = document.body.clientHeight; 
   saveRecord() {
     if (this.record.amount === 0) {
       Notify.warning("请输入记账金额");

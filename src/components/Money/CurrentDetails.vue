@@ -26,7 +26,7 @@
 
                 <tr>
                     <td>
-                        条目类型
+                        类型
                     </td>
                     <td>
                         {{ beautifyType(record.type) }}
@@ -35,7 +35,7 @@
 
                 <tr>
                     <td>
-                        条目备注
+                        备注
                     </td>
                     <td>
                         {{ record.notes }}
@@ -44,21 +44,21 @@
 
                 <tr>
                     <td>
-                        条目标签
+                        标签
                     </td>
                     <td>
                         {{ beautifyTags(record.tags) }}
                     </td>
                 </tr>
 
-                  <tr>
+                  <!-- <tr>
                     <td>
                         日期
                     </td>
                     <td>
                         {{ beautifyDate(record.createAt) }}
                     </td>
-                </tr>
+                </tr> -->
 
             </tbody>
         </table>
@@ -101,18 +101,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    line-height: 2vh;
+    line-height: 13px;
 }
 
 td,
 th {
     text-align: center;
-    padding: 1vh;
+    padding: 8px;
 }
 
 th {
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #04AA6D;
     color: white;
 }

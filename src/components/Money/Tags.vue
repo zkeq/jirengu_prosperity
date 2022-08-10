@@ -63,7 +63,7 @@ export default class Tags extends Vue {
   font-size: 14px;
   font-weight: 600;
   overflow: auto;
-  padding: 2vh;
+  padding: 14px;
 
   >.current {
     display: flex;
@@ -72,14 +72,14 @@ export default class Tags extends Vue {
     >li {
       $bg: #d9d9d9;
       background: $bg;
-      $h: 4vh;
+      $h: 28px;
       height: $h;
       line-height: $h;
       overflow: hidden;
       border-radius: $h/3;
       padding: 0 6px;
       margin-right: 12px;
-      margin-top: 1vh;
+      margin-top: 7px;
 
       &.selected {
         background: #36c685;
@@ -97,7 +97,7 @@ export default class Tags extends Vue {
 
     >button {
       width: 100%;
-      height: 4vh;
+      height: 28px;
       border-radius: 6px;
       background: #d9d9d9;
       color: #333;

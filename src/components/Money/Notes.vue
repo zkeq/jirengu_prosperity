@@ -65,7 +65,7 @@ export default class Notes extends Vue {
     }
 
     max-width: 80%;
-    height: 64px;
+    height: 56px;
     flex-grow: 1;
     background: #fff;
     padding: 0 10px;
